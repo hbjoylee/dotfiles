@@ -105,10 +105,9 @@ set smartindent
 
 " Use hard tabs
 set tabstop=8
-"set noexpandtab
-set expandtab
 set shiftwidth=8
-set textwidth=8
+set expandtab
+"set textwidth=8
 
 " Break long lines
 "set textwidth=78
