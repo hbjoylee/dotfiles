@@ -2,10 +2,10 @@
 	name = jamesli
 	email = hbjoylee@gmail.com
 [gui]
-	encoding = utf-8
+	encoding = UTF-8
 [i18n]
-	commitEncoding = uft-8
-	logOutputEncoding = utf-8
+	commitEncoding = UTF-8
+	logOutputEncoding = UTF-8
 [core]
 	editor = vim
 #	excludesfile = /root/.gitignore
