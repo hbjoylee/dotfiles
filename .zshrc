@@ -3,33 +3,9 @@
 
 # 预配置 {{{
 # 如果不是交互shell就直接结束 (unix power tool, 2.11)
-if [[  "$-" != *i* ]]; then return 0; fi
+#if [[  "$-" != *i* ]]; then return 0; fi
 
-# 为兼容旧版本定义 is-at-least 函数
-function is-at-least {
-    local IFS=".-" min_cnt=0 ver_cnt=0 part min_ver version
-
-    min_ver=(${=1})
-    version=(${=2:-$ZSH_VERSION} 0)
-
-    while (( $min_cnt <= ${#min_ver} )); do
-      while [[ "$part" != <-> ]]; do
-        (( ++ver_cnt > ${#version} )) && return 0
-        part=${version[ver_cnt]##*[^0-9]}
-      done
-
-      while true; do
-        (( ++min_cnt > ${#min_ver} )) && return 0
-        [[ ${min_ver[min_cnt]} = <-> ]] && break
-      done
-
-      (( part > min_ver[min_cnt] )) && return 0
-      (( part < min_ver[min_cnt] )) && return 1
-      part=''
-    done
-}
-
-export SHELL=`which zsh`
+SHELL=`which zsh`
 
 # 定义颜色 {{{
 if [[ ("$TERM" = *256color || "$TERM" = screen*) && -f $HOME/.lscolor256 ]]; then
@@ -76,7 +52,7 @@ setopt long_list_jobs           # show pid in bg job list
 setopt numeric_glob_sort        # when globbing numbered files, use real counting
 setopt inc_append_history       # append to history once executed
 setopt prompt_subst             # prompt more dynamic, allow function in prompt
-setopt nonomatch 
+setopt nonomatch
 
 #remove / and . from WORDCHARS to allow alt-backspace to delete word
 WORDCHARS='*?_-[]~=&;!#$%^(){}<>'
@@ -86,12 +62,14 @@ watch=(notme)
 #replace the default beep with a message
 #ZBEEP="\e[?5h\e[?5l"        # visual beep
 
-#is-at-least 4.3.0 && 
+#is-at-least 4.3.0 &&
 
 # 自动加载自定义函数
 fpath=($HOME/.zfunctions $fpath)
 # 需要设置了extended_glob才能glob到所有的函数，为了补全能用，又需要放在compinit前面
-autoload -U ${fpath[1]}/*(:t)       
+autoload -U ${fpath[1]}/*(N-.x:t)
+
+autoload -U is-at-least
 # }}}
 
 # 命令补全参数{{{
@@ -104,28 +82,28 @@ zstyle ':completion:*' ignore-parents parent pwd directory
 zstyle ':completion:*' menu select=2
 #zstyle ':completion:*' completer _complete _match _approximate
 zstyle ':completion:*' completer _oldlist _expand _force_rehash _complete _match #_user_expand
-zstyle ':completion:*:match:*' original only 
+zstyle ':completion:*:match:*' original only
 #zstyle ':completion:*' user-expand _pinyin
-zstyle ':completion:*:approximate:*' max-errors 1 numeric 
+zstyle ':completion:*:approximate:*' max-errors 1 numeric
 ## case-insensitive (uppercase from lowercase) completion
 zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]}'
 ### case-insensitive (all) completion
 #zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 zstyle ':completion:*:*:kill:*' menu yes select
 zstyle ':completion:*:*:*:*:processes' force-list always
-zstyle ':completion:*:processes' command 'ps -au$USER' 
+zstyle ':completion:*:processes' command 'ps -au$USER'
 zstyle ':completion:*:*:kill:*:processes' list-colors "=(#b) #([0-9]#)*=36=1;31"
 #use cache to speed up pacman completion
 zstyle ':completion::complete:*' use-cache on
-#zstyle ':completion::complete:*' cache-path .zcache 
+#zstyle ':completion::complete:*' cache-path .zcache
 #group matches and descriptions
 zstyle ':completion:*:matches' group 'yes'
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*:options' description 'yes'
 zstyle ':completion:*:options' auto-description '%d'
-zstyle ':completion:*:descriptions' format $'\e[33m == \e[1;7;36m %d \e[m\e[33m ==\e[m' 
+zstyle ':completion:*:descriptions' format $'\e[33m == \e[1;7;36m %d \e[m\e[33m ==\e[m'
 zstyle ':completion:*:messages' format $'\e[33m == \e[1;7;36m %d \e[m\e[0;33m ==\e[m'
-zstyle ':completion:*:warnings' format $'\e[33m == \e[1;7;31m No Matches Found \e[m\e[0;33m ==\e[m' 
+zstyle ':completion:*:warnings' format $'\e[33m == \e[1;7;31m No Matches Found \e[m\e[0;33m ==\e[m'
 zstyle ':completion:*:corrections' format $'\e[33m == \e[1;7;37m %d (errors: %e) \e[m\e[0;33m ==\e[m'
 # dabbrev for zsh!! M-/ M-,
 zstyle ':completion:*:history-words' stop yes
@@ -151,9 +129,9 @@ _force_rehash() {
 # 普通自定义函数 {{{
 #show 256 color tab
 256tab() {
-    for k in `seq 0 1`;do 
-        for j in `seq $((16+k*18)) 36 $((196+k*18))`;do 
-            for i in `seq $j $((j+17))`; do 
+    for k in `seq 0 1`;do
+        for j in `seq $((16+k*18)) 36 $((196+k*18))`;do
+            for i in `seq $j $((j+17))`; do
                 printf "\e[01;$1;38;5;%sm%4s" $i $i;
             done;echo;
         done;
@@ -161,7 +139,7 @@ _force_rehash() {
 }
 
 #alarm using atd
-alarm() { 
+alarm() {
     echo "msg ${argv[2,-1]} && aplay -q ~/.sounds/MACSound/System\ Notifi.wav" | at now + $1 min
 }
 
@@ -233,7 +211,7 @@ git_branch_precmd() { [[ "$(fc -l -1)" == *git* ]] && get_git_status }
 git_branch_chpwd() { get_git_status }
 
 #this one is to be used in prompt
-get_prompt_git() { 
+get_prompt_git() {
     if [[ -n $__CURRENT_GIT_BRANCH ]]; then
         local s=$__CURRENT_GIT_BRANCH
         case "$__CURRENT_GIT_BRANCH_STATUS" in
@@ -242,37 +220,37 @@ get_prompt_git() {
             behind) s+="-" ;;
         esac
         [[ $__CURRENT_GIT_BRANCH_IS_DIRTY = '1' ]] && s+="*"
-        echo " $pfg_black$pbg_white$pB $s $pR" 
+        echo " $pfg_black$pbg_white$pB $s $pR"
     fi
 }
 #}}}
 
-#{{{-----------------functions to set gnu screen title----------------------
+#{{{ functions to set gnu screen title
 # active command as title in terminals
 case $TERM in
     xterm*|rxvt*)
-        function title() { print -nP "\e]0;$1\a" } 
+        function title() { print -nP "\e]0;$1\a" }
         ;;
     screen*)
         #only set screen title if it is in a local shell
         if [ -n $STY ] && (screen -ls |grep $STY &>/dev/null); then
-            function title() 
+            function title()
             {
                 #modify screen title
                 print -nP "\ek$1\e\\"
                 #modify window title bar
                 #print -nPR $'\033]0;'$2$'\a'
-            } 
+            }
         elif [ -n $TMUX ]; then       # actually in tmux !
             function title() {  print -nP "\e]2;$1\a" }
         else
             function title() {}
         fi
         ;;
-    *) 
-        function title() {} 
+    *)
+        function title() {}
         ;;
-esac     
+esac
 
 #set screen title if not connected remotely
 #if [ "$STY" != "" ]; then
@@ -298,14 +276,14 @@ screen_preexec() {
 
 #}}}
 
-#{{{-----------------define magic function arrays--------------------------
+#{{{define magic function arrays
 if ! (is-at-least 4.3); then
-    #the following solution should work on older version <4.3 of zsh. 
+    #the following solution should work on older version <4.3 of zsh.
     #The "function" keyword is essential for it to work with the old zsh.
     #NOTE these function fails dynamic screen title, not sure why
     #CentOS stinks.
     function precmd() {
-        screen_precmd 
+        screen_precmd
         git_branch_precmd
     }
 
@@ -352,7 +330,7 @@ PR_SHIFT_IN="%{$terminfo[smacs]%}"
 PR_SHIFT_OUT="%{$terminfo[rmacs]%}"
 #PR_RSEP=$PR_SET_CHARSET$PR_SHIFT_IN${altchar[\`]:-|}$PR_SHIFT_OUT
 local prompt_time="%(?:$pfg_green:$pfg_red)%*$pR"
-RPROMPT='$__PROMPT_PWD $prompt_time'
+RPROMPT='$__PROMPT_PWD'
 
 # SPROMPT - the spelling prompt
 SPROMPT="${pfg_yellow}zsh$pR: correct '$pfg_red$pB%R$pR' to '$pfg_green$pB%r$pR' ? ([${pfg_cyan}Y$pR]es/[${pfg_cyan}N$pR]o/[${pfg_cyan}E$pR]dit/[${pfg_cyan}A$pR]bort) "
@@ -410,7 +388,7 @@ fi
 
 # }}}
 
-# 键绑定  {{{ 
+# 键绑定  {{{
 autoload history-search-end
 zle -N history-beginning-search-backward-end history-search-end
 zle -N history-beginning-search-forward-end history-search-end
@@ -428,9 +406,11 @@ bindkey '\ee' edit-command-line
 
 # }}}
 
-# 自定义widget {{{
-#from linuxtoy.org: 
-#   pressing TAB in an empty command makes a cd command with completion list
+# ZLE 自定义widget {{{
+#
+
+# {{{ pressing TAB in an empty command makes a cd command with completion list
+# from linuxtoy.org
 dumb-cd(){
     if [[ -n $BUFFER ]] ; then # 如果该行有内容
         zle expand-or-complete # 执行 TAB 原来的功能
@@ -438,12 +418,13 @@ dumb-cd(){
         BUFFER="cd " # 填入 cd（空格）
         zle end-of-line # 这时光标在行首，移动到行末
         zle expand-or-complete # 执行 TAB 原来的功能
-    fi 
+    fi
 }
 zle -N dumb-cd
 bindkey "\t" dumb-cd #将上面的功能绑定到 TAB 键
+# }}}
 
-# colorize command as blue if found in path or defined.
+# {{{ colorize commands
 TOKENS_FOLLOWED_BY_COMMANDS=('|' '||' ';' '&' '&&' 'sudo' 'do' 'time' 'strace')
 
 recolor-cmd() {
@@ -461,7 +442,7 @@ recolor-cmd() {
                 *'alias for'*)       style="fg=cyan,bold";;
                 *'shell builtin'*)   style="fg=yellow,bold";;
                 *'shell function'*)  style='fg=green,bold';;
-                *"$arg is"*)         
+                *"$arg is"*)
                     [[ $arg = 'sudo' ]] && style="fg=red,bold" || style="fg=blue,bold";;
                 *)                   style='none,bold';;
             esac
@@ -477,11 +458,12 @@ check-cmd-backward-delete-char() { zle .backward-delete-char && recolor-cmd }
 
 zle -N self-insert check-cmd-self-insert
 zle -N backward-delete-char check-cmd-backward-delete-char
+# }}}
 
-#拼音补全
+# 拼音补全
 function _pinyin() { reply=($($HOME/bin/chsdir 0 $*)) }
 
-#add sudo to current buffer
+# {{{ double ESC to prepend "sudo"
 sudo-command-line() {
     [[ -z $BUFFER ]] && zle up-history
     [[ $BUFFER != sudo\ * ]] && BUFFER="sudo $BUFFER"
@@ -490,9 +472,25 @@ sudo-command-line() {
 zle -N sudo-command-line
 #定义快捷键为： [Esc] [Esc]
 bindkey "\e\e" sudo-command-line
+# }}}
 
-#c-z to continue as well
+# {{{ c-z to continue
 bindkey -s "" "fg\n"
+# }}}
+
+# {{{ esc-enter to run program in screen split region
+function run-command-in-split-screen() {
+    screen -X eval \
+        "focus bottom" \
+        split \
+        "focus bottom" \
+        "screen $HOME/bin/screen_run $BUFFER" \
+        "focus top"
+    zle kill-buffer
+}
+zle -N run-command-in-split-screen
+bindkey "\e\r" run-command-in-split-screen
+# }}}
 
 # }}}
 
@@ -537,7 +535,7 @@ export READNULLCMD=less
 
 # }}}
 
-# 读入其他配置 {{{ 
+# 读入其他配置 {{{
 
 # 主机特定的配置，前置的主要原因是有可能需要提前设置PATH等环境变量
 #   例如在aix主机，需要把 /usr/linux/bin
@@ -569,7 +567,7 @@ alias -g NF="./*(oc[1])"      # last modified(inode time) file or directory
 #file types
 (bin-exist apvlv) && alias -s pdf=apvlv
 alias -s ps=gv
-for i in jpg png;           alias -s $i=gqview
+for i in jpg png;           alias -s $i=sxiv
 for i in avi rmvb wmv;      alias -s $i=mplayer
 for i in rar zip 7z lzma;   alias -s $i="7z x"
 
@@ -602,7 +600,7 @@ alias vless="/usr/share/vim/vim72/macros/less.sh"
 del() {mv -vif -- $* ~/.Trash}
 alias m='mutt'
 alias port='netstat -ntlp'      #opening ports
-#Terminal - Harder, Faster, Stronger SSH clients 
+#Terminal - Harder, Faster, Stronger SSH clients
 #alias ssh="ssh -4 -C -c blowfish-cbc"
 #alias e264='mencoder -vf harddup -ovc x264 -x264encopts crf=22:subme=6:frameref=2:8x8dct:bframes=3:weight_b:threads=auto -oac mp3lame -lameopts aq=7:mode=0:vol=1.2:vbr=2:q=6 -srate 32000'
 alias e264='mencoder -vf harddup -ovc x264 -x264encopts crf=22:subme=6:frameref=2:8x8dct:bframes=3:weight_b:threads=auto -oac copy'
@@ -619,4 +617,3 @@ alias tslashem='telnet slashem.crash-override.net'
 #}}}
 
 typeset -U PATH
-#add by jamesli
