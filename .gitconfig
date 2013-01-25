@@ -8,7 +8,9 @@
 	logOutputEncoding = UTF-8
 [core]
 	editor = vim
+	autocrlf = input
 #	excludesfile = /root/.gitignore
+
 [color]
 	status=auto
 	branch=auto
@@ -32,3 +34,5 @@
 [alias]
 	unstage = reset HEAD --
 	last = log -1 HEAD
+[push]
+	default = matching
