@@ -1,0 +1,6 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =4
+let g:netrw_dirhist_1='/mnt'
+let g:netrw_dirhist_2='/var/log/glusterfs'
+let g:netrw_dirhist_3='/root/gluster_git/test/bin/ft/scripts'
+let g:netrw_dirhist_4='/root/gluster_git/test/src/ft'
