@@ -26,8 +26,11 @@ fe80::1%lo0	localhost
 127.0.0.1 activate-sjc0.adobe.com
 
 #cleanmymac
-127.0.0.1       macpaw.com
-127.0.0.1       www.macpaw.com
+127.0.0.1 macpaw.com
+127.0.0.1 www.macpaw.com
+127.0.0.1 tds.macpaw.com
+127.0.0.1 sn.macpaw.com
+127.0.0.1 users.macpaw.com
 
 #apple
 219.76.10.14 a1.phobos.apple.com
