@@ -581,7 +581,7 @@ alias freeze='kill -STOP'
 alias ls=$'ls -G'
 alias vi='vim'
 alias ll='ls -l'
-alias df='df -Th'
+alias df='df -h'
 alias du='du -h'
 #show directories size
 alias dud='du -s *(/)'
