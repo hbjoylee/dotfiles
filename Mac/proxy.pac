@@ -43,6 +43,7 @@ function FindProxyForURL(url, host) {
                 'golang.org',
                 'vimeo.com',
                 //'appengine.google.com',
+                'sourceforge.net',
                 'wordpress.com' ];
 
 
