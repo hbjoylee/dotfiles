@@ -8,6 +8,11 @@ function isMatchProxy(url, pattern) {
 }
 
 function FindProxyForURL(url, host) {
+        if (shExpMatch(url, "*.google.com/*"))
+        {
+                return "SOCKS5 127.0.0.1:7070"; 
+        }
+        
         var Proxy = 'SOCKS5 127.0.0.1:7070; DIRECT;';
 
         var list = [
@@ -27,6 +32,7 @@ function FindProxyForURL(url, host) {
                 'youtube.com',
                 'ytimg.com',
                 'plus.google.com',
+                'www.google.com',
                 'ggpht.com',
                 'talkgadget.google.com',
                 'picasaweb.google.com',
