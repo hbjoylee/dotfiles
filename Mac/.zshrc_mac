@@ -506,6 +506,7 @@ export PATH=/usr/local/bin:/usr/local/sbin:$PATH:/usr/local/share/python
 export EDITOR=vim
 export VISUAL=vim
 export SUDO_PROMPT=$'[\e[31;5msudo\e[m] password for \e[33;1m%p\e[m: '
+export JAVA_HOME=/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home
 
 #MOST like colored man pages
 export PAGER=less
@@ -580,6 +581,7 @@ alias cal='cal -3'
 alias freeze='kill -STOP'
 alias ls=$'ls -G'
 alias vi='vim'
+alias tailf='tail -f'
 alias ll='ls -l'
 alias df='df -h'
 alias du='du -h'
