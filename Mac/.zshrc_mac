@@ -502,7 +502,8 @@ export SAVEHIST=10000
 # location of history
 export HISTFILE=$HOME/.zsh_history
 
-export PATH=/usr/local/bin:/usr/local/sbin:$PATH:/usr/local/share/python
+export ANT_HOME=/usr/shared/ant
+export PATH=$ANT_HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH:/usr/local/share/python
 export EDITOR=vim
 export VISUAL=vim
 export SUDO_PROMPT=$'[\e[31;5msudo\e[m] password for \e[33;1m%p\e[m: '
