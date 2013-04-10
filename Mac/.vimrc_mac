@@ -5,6 +5,9 @@
 " Be IMproved
 set nocompatible
 
+" cursor in middle
+set scrolloff=999
+
 " Set backspace
 set backspace=eol,start,indent
 
@@ -113,7 +116,7 @@ set expandtab
 set cindent shiftwidth=8
 
 " Break long lines
-set textwidth=80
+" set textwidth=80
 
 " Set auto-formating
 set formatoptions+=mM
