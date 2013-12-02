@@ -8,7 +8,7 @@
 	logOutputEncoding = UTF-8
 [core]
 	editor = vim
-	autocrlf = input
+	autocrlf = false
 #	excludesfile = /root/.gitignore
 
 [color]
