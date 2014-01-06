@@ -1,0 +1,45 @@
+[user]
+	name = JamesLi
+	email = hbjoylee@gmail.com
+[gui]
+	encoding = UTF-8
+[i18n]
+	commitEncoding = UTF-8
+	logOutputEncoding = UTF-8
+[core]
+	editor = vim
+	autocrlf = false
+	excludesfile = /Users/Jack/.gitignore_global
+#	excludesfile = /root/.gitignore
+
+[color]
+	status=auto
+	branch=auto
+	ui=true
+	pager=true
+[color "branch"]
+	current=yellow reverse
+	local=yellow
+	remote=green
+[color "diff"]
+	meta=yellow bold
+	frag=magenta bold
+	old=red bold
+	new=green bold
+[color "status"]
+	added=yellow
+	changed=green
+	untracked=cyan
+[merge]
+	tool = vimdiff
+[alias]
+	unstage = reset HEAD --
+	last = log -1 HEAD
+[push]
+	default = matching
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path =
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
