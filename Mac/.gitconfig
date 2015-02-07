@@ -9,7 +9,7 @@
 [core]
 	editor = vim
 	autocrlf = false
-	excludesfile = /Users/Jack/.gitignore_global
+	excludesfile = /Users/JackLi/.gitignore_global
 #	excludesfile = /root/.gitignore
 
 [color]
@@ -39,7 +39,7 @@
 	default = matching
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path =
+	path = 
 [mergetool "sourcetree"]
 	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true

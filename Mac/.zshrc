@@ -506,8 +506,9 @@ export ANT_HOME=/usr/share/ant
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/1.6.0_65-b14-462.jdk/Contents/Home
 export GOROOT=/usr/local/go
 export GOPATH=/Users/JackLi/Opensource/GO
+export MYSQL_HOME=/usr/local/mysql-5.6.20-osx10.8-x86_64
 export CLASS_PATH=$JAVA_HOME/lib
-export PATH=$ANT_HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH:/usr/local/share/python:$GOROOT/bin
+export PATH=$ANT_HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH:/usr/local/share/python:$GOROOT/bin:$MYSQL_HOME/bin
 export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH
 export EDITOR=vim
 export VISUAL=vim
@@ -626,5 +627,8 @@ alias javac='javac -J-Dfile.encoding=UTF-8'
 export HOMEBREW_GITHUB_API_TOKEN=b8d2c79343a80c913f70ad45c0f9ada4c01e859c
 #export LANG=zh_CN.UTF-8
 typeset -U PATH
-launchctl setenv GOROOT /usr/local/go
-launchctl setenv GOPATH /Users/JackLi/Opensource/GO
+reattach-to-user-namespace launchctl setenv GOROOT /usr/local/go
+reattach-to-user-namespace launchctl setenv GOPATH /Users/JackLi/Opensource/GO
+#mysql
+alias mysql=/usr/local/mysql/bin/mysql
+alias mysqladmin=/usr/local/mysql/bin/mysqladmin
