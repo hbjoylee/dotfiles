@@ -197,6 +197,8 @@ get_git_status() {
                 __CURRENT_GIT_BRANCH_STATUS='ahead'
             elif [[ $arr[2] =~ 'diverged' ]]; then
                 __CURRENT_GIT_BRANCH_STATUS='diverged'
+	    elif [[ $arr[2] =~ 'up-to-date' ]]; then
+		__CURRENT_GIT_BRANCH_STATUS='uptodate'
             else
                 __CURRENT_GIT_BRANCH_STATUS='behind'
             fi
