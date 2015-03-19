@@ -18,6 +18,7 @@ filetype plugin indent on
 
 " Set fileencodings
 set fileencodings=utf-8,gbk,ucs-bom,big5
+set nobomb
 
 " Set complete options
 set completeopt=longest,menu
