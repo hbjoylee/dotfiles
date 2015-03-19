@@ -197,6 +197,8 @@ get_git_status() {
                 __CURRENT_GIT_BRANCH_STATUS='ahead'
             elif [[ $arr[2] =~ 'diverged' ]]; then
                 __CURRENT_GIT_BRANCH_STATUS='diverged'
+	    elif [[ $arr[2] =~ 'up-to-date' ]]; then
+		__CURRENT_GIT_BRANCH_STATUS='uptodate'
             else
                 __CURRENT_GIT_BRANCH_STATUS='behind'
             fi
@@ -502,7 +504,8 @@ export SAVEHIST=10000
 # location of history
 export HISTFILE=$HOME/.zsh_history
 
-export PATH=$PATH:/usr/local/go/bin
+export GOROOT=/usr/local/go
+export PATH=$PATH:$GOROOT/bin
 export EDITOR=vim
 export VISUAL=vim
 export SUDO_PROMPT=$'[\e[31;5msudo\e[m] password for \e[33;1m%p\e[m: '
