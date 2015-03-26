@@ -33,8 +33,13 @@
 [merge]
 	tool = vimdiff
 [alias]
-	unstage = reset HEAD --
+	unstage = reset HEAD
 	last = log -1 HEAD
+	st=status
+	co=checkout
+	ci=commit
+	br=branch
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 [push]
 	default = matching
 [difftool "sourcetree"]
