@@ -504,14 +504,11 @@ export SAVEHIST=10000
 # location of history
 export HISTFILE=$HOME/.zsh_history
 
-export ANT_HOME=/usr/share/ant
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/1.6.0_65-b14-462.jdk/Contents/Home
+export JAVA_HOME=$(/usr/libexec/java_home)
 export GOROOT=/usr/local/go
 export GOPATH=/Users/JackLi/Opensource/GO
-export MYSQL_HOME=/usr/local/mysql-5.6.20-osx10.8-x86_64
 export CLASS_PATH=$JAVA_HOME/lib
-export PATH=$ANT_HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH:/usr/local/share/python:$GOROOT/bin:$MYSQL_HOME/bin
-export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH
+export PATH=/usr/local/bin:/usr/local/sbin:$PATH:$GOROOT/bin
 export EDITOR=vim
 export VISUAL=vim
 export SUDO_PROMPT=$'[\e[31;5msudo\e[m] password for \e[33;1m%p\e[m: '
@@ -597,10 +594,8 @@ alias du='du -h'
 alias dud='du -s *(/)'
 #date for US and CN
 alias adate='for i in US/Eastern Australia/{Brisbane,Sydney} Asia/{Hong_Kong,Singapore} Europe/Paris; do printf %-22s "$i:";TZ=$i date +"%m-%d %a %H:%M";done'
-#bloomberg radio
-alias bloomberg='mplayer mms://media2.bloomberg.com/wbbr_sirus.asf'
 alias pyprof='python -m cProfile'
-alias python='nice python'
+#alias python='/usr/bin/python'
 alias info='info --vi-keys'
 alias rsync='rsync --progress --partial'
 alias ri='ri -T -f ansi --width=$COLUMNS'
@@ -629,8 +624,5 @@ alias javac='javac -J-Dfile.encoding=UTF-8'
 export HOMEBREW_GITHUB_API_TOKEN=b8d2c79343a80c913f70ad45c0f9ada4c01e859c
 #export LANG=zh_CN.UTF-8
 typeset -U PATH
-reattach-to-user-namespace launchctl setenv GOROOT /usr/local/go
-reattach-to-user-namespace launchctl setenv GOPATH /Users/JackLi/Opensource/GO
-#mysql
-alias mysql=/usr/local/mysql/bin/mysql
-alias mysqladmin=/usr/local/mysql/bin/mysqladmin
+#reattach-to-user-namespace launchctl setenv GOROOT /usr/local/go
+#reattach-to-user-namespace launchctl setenv GOPATH /Users/JackLi/Opensource/GO
