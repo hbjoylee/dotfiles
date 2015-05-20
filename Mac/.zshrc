@@ -505,7 +505,7 @@ export SAVEHIST=10000
 export HISTFILE=$HOME/.zsh_history
 
 export JAVA_HOME=$(/usr/libexec/java_home)
-export GOROOT=/usr/local/go
+export GOROOT=/usr/local/opt/go/
 export GOPATH=/Users/JackLi/Opensource/GO
 export CLASS_PATH=$JAVA_HOME/lib
 export PATH=/usr/local/bin:/usr/local/sbin:$PATH:$GOROOT/bin
