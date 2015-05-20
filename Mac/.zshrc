@@ -508,7 +508,24 @@ export JAVA_HOME=$(/usr/libexec/java_home)
 export GOROOT=/usr/local/opt/go/
 export GOPATH=/Users/JackLi/Opensource/GO
 export CLASS_PATH=$JAVA_HOME/lib
-export PATH=/usr/local/bin:/usr/local/sbin:$PATH:$GOROOT/bin
+
+#GNUCOMMAND
+export GNUCOREUTILSPATH=/usr/local/opt/coreutils/libexec/gnubin
+export GNUTARPATH=/usr/local/opt/gnu-tar/libexec/gnubin
+export GNUSEDPATH=/usr/local/opt/gnu-sed/libexec/gnubin
+export GNUCOMMANDPATH=$GNUCOREUTILSPATH:$GNUTARPATH:$GNUSEDPATH
+
+#GNUMAN
+export GNUCOREUTILSMANPATH=/usr/local/opt/coreutils/libexec/gnuman
+export GNUSEDMANPATH=/usr/local/opt/gnu-sed/libexec/gnuman
+export GNUMANPATH=$GNUCOREUTILSMANPATH:$GNUSEDMANPATH
+
+#MANPAGE
+export MANPATH=$GNUMANPATH:$MANPATH
+
+#PATH
+export PATH=$GNUCOMMANDPATH:/usr/local/bin:/usr/local/sbin:$PATH:$GOROOT/bin
+
 export EDITOR=vim
 export VISUAL=vim
 export SUDO_PROMPT=$'[\e[31;5msudo\e[m] password for \e[33;1m%p\e[m: '
