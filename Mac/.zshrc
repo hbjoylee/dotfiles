@@ -513,7 +513,7 @@ export CLASS_PATH=$JAVA_HOME/lib
 export GNUCOREUTILSPATH=/usr/local/opt/coreutils/libexec/gnubin
 export GNUTARPATH=/usr/local/opt/gnu-tar/libexec/gnubin
 export GNUSEDPATH=/usr/local/opt/gnu-sed/libexec/gnubin
-#export GNUCOMMANDPATH=$GNUCOREUTILSPATH:$GNUTARPATH:$GNUSEDPATH
+export GNUCOMMANDPATH=$GNUCOREUTILSPATH:$GNUTARPATH:$GNUSEDPATH
 
 #GNUMAN
 export GNUCOREUTILSMANPATH=/usr/local/opt/coreutils/libexec/gnuman
@@ -524,7 +524,14 @@ export GNUMANPATH=$GNUCOREUTILSMANPATH:$GNUSEDMANPATH
 export MANPATH=$GNUMANPATH:$MANPATH
 
 #PATH
-export PATH=/usr/local/bin:/usr/local/sbin:$PATH:$GOROOT/bin
+export PATH=$GNUCOMMANDPATH:/usr/local/bin:/usr/local/sbin:$PATH:$GOROOT/bin
+#use gls as default ls,see PATH
+if [ -e /usr/local/bin/gls ]
+then
+	alias ls='gls --color=auto'
+else
+	alias ls='ls -G'
+fi
 
 export EDITOR=vim
 export VISUAL=vim
@@ -601,12 +608,13 @@ alias grep='grep -I --color=auto'
 alias egrep='egrep -I --color=auto'
 alias cal='cal -3'
 alias freeze='kill -STOP'
-alias ls=$'ls -G'
 alias vi='vim'
 alias tailf='tail -f'
 alias ll='ls -l'
 alias df='df -h'
 alias du='du -h'
+
+
 #show directories size
 alias dud='du -s *(/)'
 #date for US and CN
