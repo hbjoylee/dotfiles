@@ -303,3 +303,9 @@ set virtualedit=all
 
 "set nowrapscan
 set nowrapscan
+
+"javascript
+let g:tlist_javascript_settings = 'javascript;s:string;a:array;o:object;f:function;m:member'
+
+"set new file extension jsm as javascript file.
+"au BufNewFile,BufRead *.jsm set filetype=javascript
