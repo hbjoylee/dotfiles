@@ -522,9 +522,11 @@ export GNUMANPATH=$GNUCOREUTILSMANPATH:$GNUSEDMANPATH
 
 #MANPAGE
 export MANPATH=$GNUMANPATH:$MANPATH
+#ant home
+export ANT_HOME=/usr/local/ant
 
 #PATH
-export PATH=$GNUCOMMANDPATH:/usr/local/bin:/usr/local/sbin:$PATH:$GOROOT/bin
+export PATH=$GNUCOMMANDPATH:/usr/local/bin:/usr/local/sbin:$PATH:$GOROOT/bin:$ANT_HOME/bin
 #use gls as default ls,see PATH
 if [ -e /usr/local/bin/gls ]
 then
