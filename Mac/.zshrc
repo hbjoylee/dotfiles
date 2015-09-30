@@ -653,3 +653,8 @@ export HOMEBREW_GITHUB_API_TOKEN=b8d2c79343a80c913f70ad45c0f9ada4c01e859c
 typeset -U PATH
 #reattach-to-user-namespace launchctl setenv GOROOT /usr/local/go
 #reattach-to-user-namespace launchctl setenv GOPATH /Users/JackLi/Opensource/GO
+#
+#for zsh
+unalias run-help
+autoload run-help
+HELPDIR=/usr/local/share/zsh/help
