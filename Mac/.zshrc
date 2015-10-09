@@ -648,7 +648,7 @@ alias tslashem='telnet slashem.crash-override.net'
 alias javac='javac -J-Dfile.encoding=UTF-8'
 
 #}}}
-export HOMEBREW_GITHUB_API_TOKEN=b8d2c79343a80c913f70ad45c0f9ada4c01e859c
+export HOMEBREW_GITHUB_API_TOKEN=
 #export LANG=zh_CN.UTF-8
 typeset -U PATH
 #reattach-to-user-namespace launchctl setenv GOROOT /usr/local/go
