@@ -530,7 +530,7 @@ export PATH=$GNUCOMMANDPATH:/usr/local/bin:/usr/local/sbin:$PATH:$GOROOT/bin:$AN
 #use gls as default ls,see PATH
 if [ -e /usr/local/bin/gls ]
 then
-	alias ls='gls --color=auto'
+	alias ls='gls --color=auto -al'
 else
 	alias ls='ls -G'
 fi
@@ -612,7 +612,7 @@ alias cal='cal -3'
 alias freeze='kill -STOP'
 alias vi='vim'
 alias tailf='tail -f'
-alias ll='ls -l'
+alias ll='ls -al'
 alias df='df -h'
 alias du='du -h'
 
@@ -655,6 +655,7 @@ typeset -U PATH
 #reattach-to-user-namespace launchctl setenv GOPATH /Users/JackLi/Opensource/GO
 #
 #for zsh
-unalias run-help
+#unalias run-help
+[[ -n $(alias run-help) ]] && unalias run-help
 autoload run-help
 HELPDIR=/usr/local/share/zsh/help
