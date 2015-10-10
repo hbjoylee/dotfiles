@@ -530,7 +530,7 @@ export PATH=$GNUCOMMANDPATH:/usr/local/bin:/usr/local/sbin:$PATH:$GOROOT/bin:$AN
 #use gls as default ls,see PATH
 if [ -e /usr/local/bin/gls ]
 then
-	alias ls='gls --color=auto -al'
+	alias ls='gls --color=auto'
 else
 	alias ls='ls -G'
 fi
